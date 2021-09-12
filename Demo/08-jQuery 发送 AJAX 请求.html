@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>08-jQuery 发送 AJAX 请求</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="page-header">jQuery 发送 AJAX 请求</h2>
+        <button class="btn btn-primary">GET</button>
+        <button class="btn btn-danger">POST</button>
+        <button class="btn btn-info">通用方法</button>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        var btns = $('button');
+        btns.eq(0).click(() => {
+            $.get('http://127.0.0.1:8000/server-jquery', { a: 100, b: 200 }, (data) => {
+                console.log(typeof data, data); // object {name: "Hello jquery"}
+            }, 'json');
+        });
+        btns.eq(1).click(() => {
+            $.post('http://127.0.0.1:8000/server-jquery', { a: 100, b: 200 }, (data) => {
+                console.log(typeof data, data); // string {name: "Hello jquery"}
+            });
+        });
+        btns.eq(2).click(() => {
+            $.ajax({
+                // 请求地址
+                url: 'http://127.0.0.1:8000/server-jquery',
+                // 请求参数
+                data: { a: 100, b: 200 },
+                // 请求类型
+                type: 'GET',
+                // 响应体类型
+                dataType: 'json',
+                // 成功回调
+                success: data => {
+                    console.log(typeof data, data); // string {name: "Hello jquery"}  开启dataType后：object {name: "Hello jquery"}
+                },
+                // 超时时间
+                timeout: 1000,
+                // 失败的回调
+                error: () => {
+                    alert('出错了');
+                },
+                // 头信息
+                headers: {
+                    c: 300,
+                    d: 400
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

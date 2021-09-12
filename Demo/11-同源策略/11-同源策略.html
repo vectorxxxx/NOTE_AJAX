@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11-同源策略</title>
+</head>
+
+<body>
+    <h2>同源策略</h2>
+    <button>获取用户数据</button>
+    <script type="text/javascript">
+        const btn = document.querySelector('button');
+        btn.onclick = function () {
+            const xhr = new XMLHttpRequest();
+            // 这里因为是满足同源策略的，所以url可以简写
+            xhr.open('GET', '/data');
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 300) {
+                    console.log(xhr.response); // 用户数据
+                }
+            };
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02-实践</title>
+</head>
+
+<body>
+    用户名：<input type="text" id="username">
+    <p></p>
+    <script>
+        //声明handle函数
+        function handle(data) {
+            var input = document.querySelector('input');
+            input.style.border = "solid 1px #f00";
+            //修改p标签的提示文本
+            var p = document.querySelector('p');
+            p.innerHTML = data.msg;
+        }
+    </script>
+    <script>
+        const input = document.querySelector('input');
+        input.onblur = () => {
+            let username = this.username;
+            // 1、创建一个 script 标签
+            var script = document.createElement('script');
+            // 2、设置 src 属性
+            script.src = 'http://127.0.0.1:8000/check-username';
+            // 3、将 script 插入文档中
+            document.body.appendChild(script);
+        };
+    </script>
+</body>
+
+</html>

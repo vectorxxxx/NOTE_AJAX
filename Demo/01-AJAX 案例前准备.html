@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>02-AJAX 案例前准备</title>
+    <style>
+        #result {
+            width: 200px;
+            height: 100px;
+            border: 1px solid #90b;
+        }
+    </style>
+</head>
+
+<body>
+    <button>点击发送请求</button><br><br>
+    <div id="result"></div>
+    <script>
+        const result = document.getElementById('result');
+        // 按钮绑定事件
+        const button = document.getElementsByTagName('button')[0];
+        button.onclick = function () {
+            // 1、创建对象
+            const xhr = new XMLHttpRequest();
+            // 2、初始化
+            //      参数1：请求方法
+            //      参数2：请求地址，目前学习阶段要写全，不要省略
+            xhr.open('GET', 'http://127.0.0.1:8000/server');
+            // 3、发送
+            xhr.send();
+            // 4、事件绑定，处理服务器端返回的结果
+            //      readeyState：xhr 对象中的属性
+            //          0：未初始化
+            //          1：open 方法调用完毕
+            //          2：send 方法调用完毕
+            //          3：服务端返回部分结果
+            //          4：服务端返回所有结果
+            xhr.onreadystatechange = function () {
+                // 服务端返回所有结果
+                if (this.readyState === 4) {
+                    // 2xx 成功
+                    if (this.status >= 200 && this.status < 300) {
+                        // 状态码、状态字符串
+                        console.log(this.status); // 200
+                        console.log(this.statusText); // OK
+                        // 响应头
+                        console.log(this.getAllResponseHeaders()); // content-length: 13    content-type: text/html; charset=utf-8
+                        // 响应体
+                        console.log(this.response); // Hello Express
+                        // 将响应体内容设置为文本
+                        result.innerHTML = this.response;
+                    }
+                }
+            };
+        }
+    </script>
+</body>
+
+</html>

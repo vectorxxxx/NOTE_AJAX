@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>03-AJAX 发送 POST 请求</title>
+    <style>
+        #result {
+            width: 200px;
+            height: 100px;
+            border: 1px solid #903;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="result"></div>
+    <script>
+        const result = document.getElementById('result');
+        result.addEventListener('mouseover', function () {
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'http://127.0.0.1:8000/server');
+            // 设置预定义请求头
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); // 设置请求体内容类型
+            // 设置自定义请求头
+            xhr.setRequestHeader('name', 'atguigu');
+            // 设置请求体
+            xhr.send('a=100&b=200&c=300');
+            xhr.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status >= 200 && this.status < 300) {
+                    result.innerHTML = this.response;
+                }
+            };
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04-服务器端响应 JSON 数据</title>
+    <style>
+        #result {
+            width: 200px;
+            height: 100px;
+            border: 1px solid #903;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="result"></div>
+    <script>
+        const result = document.getElementById('result');
+        window.onkeydown = function () {
+            const xhr = new XMLHttpRequest();
+            // 设置响应体类型
+            xhr.responseType = 'json';
+            xhr.open('POST', 'http://127.0.0.1:8000//server-json');
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status >= 200 && this.status < 300) {
+                    let response = this.response;
+
+                    // 手动转换数据
+                    // console.log(typeof response); // string
+                    // data = JSON.parse(response);
+                    // result.innerHTML = data.name;
+
+                    // 自动转换数据
+                    console.log(typeof response); // object
+                    result.innerHTML = response.name;
+                }
+            };
+        }
+    </script>
+</body>
+
+</html>

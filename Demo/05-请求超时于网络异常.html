@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>06-请求超时于网络异常</title>
+    <style>
+        #result {
+            width: 200px;
+            height: 100px;
+            border: 1px solid #903;
+        }
+    </style>
+</head>
+
+<body>
+    <button>点击发送请求</button><br><br>
+    <div id="result"></div>
+    <script>
+        const btn = document.getElementsByTagName('button')[0];
+        const result = document.querySelector('#result');
+        btn.addEventListener('click', function () {
+            const xhr = new XMLHttpRequest();
+            // 设置超时时间
+            xhr.timeout = 1000;
+            // 设置超时回调
+            xhr.ontimeout = () => {
+                alert("请求超时！");
+            };
+            // 设置网络异常回调
+            xhr.onerror = () => {
+                alert("网络异常");
+            };
+            // 设置响应体类型
+            xhr.open('GET', 'http://127.0.0.1:8000/server-timeout');
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (this.readyState === 4 && this.status >= 200 && this.status < 300) {
+                    result.innerHTML = this.response;
+                }
+            };
+        });
+    </script>
+</body>
+
+</html>

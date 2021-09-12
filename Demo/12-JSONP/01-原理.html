@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01-原理</title>
+    <style>
+        #result {
+            width: 300px;
+            height: 100px;
+            border: solid 1px #78a;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="result"></div>
+
+    <script>
+        function handle(data) {
+            const result = document.getElementById('result');
+            result.innerHTML = data.name;
+        }
+    </script>
+    <!-- <script src="./js/app.js"></script> -->
+    <!-- 使用 live-server 启动后的地址 -->
+    <!-- <script src="http://127.0.0.1:5500/12-JSONP/js/app.js"></script> -->
+
+    <!-- jsonp 就是、利用这一特性进行跨域的 -->
+    <script src="http://127.0.0.1:8000/server-jsonp"></script>
+    <!-- 如果返回的不是 js 脚本，则会报错：
+        server-jsonp:1 Uncaught SyntaxError: Unexpected identifier -->
+</body>
+
+</html>

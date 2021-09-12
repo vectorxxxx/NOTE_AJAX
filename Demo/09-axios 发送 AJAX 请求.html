@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>09-axios 发送 AJAX 请求</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="page-header">axios 发送 AJAX 请求</h2>
+        <button class="btn btn-primary">GET</button>
+        <button class="btn btn-danger">POST</button>
+        <button class="btn btn-info">AJAX</button>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script type="text/javascript">
+        var btns = $('button');
+        axios.defaults.baseURL = 'http://127.0.0.1:8000/';
+        btns.eq(0).click(() => {
+            axios.get('server-axios', {
+                // 请求参数
+                params: {
+                    a: 100,
+                    b: 200
+                },
+                // 请求头
+                headers: {
+                    c: 300,
+                    d: 400
+                }
+            }).then(value => {
+                console.log(value);
+            });
+        });
+        btns.eq(1).click(() => {
+            axios.post('server-axios', {
+                // 请求体
+                e: 500,
+                f: 600
+            }, {
+                // 请求参数
+                params: {
+                    a: 100,
+                    b: 200
+                },
+                // 请求头
+                headers: {
+                    c: 300,
+                    d: 400
+                }
+            }).then(value => {
+                console.log(value);
+            });
+        });
+        btns.eq(2).click(() => {
+            axios({
+                method: 'POST',
+                url: 'server-axios',
+                // 请求参数
+                params: {
+                    a: 100,
+                    b: 200
+                },
+                // 请求头
+                headers: {
+                    c: 300,
+                    d: 400
+                },
+                // 请求体
+                data: {
+                    e: 500,
+                    f: 600
+                },
+                // 响应体类型
+                dataType: 'json'
+            }).then(response => {
+                console.log(response.status); // 200
+                console.log(response.statusText); // OK
+                console.log(response.headers); // {content-length: "22", content-type: "text/html; charset=utf-8"}
+                console.log(typeof response.data, response.data); // object {name: "Hello axios"}
+            });
+        });
+    </script>
+</body>
+
+</html>

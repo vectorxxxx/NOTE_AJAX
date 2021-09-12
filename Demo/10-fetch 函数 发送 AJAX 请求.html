@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10-fetch 函数 发送 AJAX 请求</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h2 class="page-header">fetch 函数发送 AJAX 请求</h2>
+        <button class="btn btn-primary">GET</button>
+        <button class="btn btn-danger">POST</button>
+        <button class="btn btn-info">AJAX</button>
+    </div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        var btns = $('button');
+        btns.eq(1).click(() => {
+            fetch('http://127.0.0.1:8000/server-fetch?a=100&b=100', {
+                // 请求方法
+                method: 'POST',
+                // 请求头
+                headers: {
+                    c: 300,
+                    d: 400
+                },
+                // 请求体
+                body: 'e=500&f=600'
+            }).then(response => {
+                // return response.text();
+                return response.json();
+            }).then(response => {
+                // console.log(typeof response, response); // string {name: "Hello fetch"}
+                console.log(typeof response, response); // object {name: "Hello fetch"}
+            });
+        });
+    </script>
+</body>
+
+</html>
