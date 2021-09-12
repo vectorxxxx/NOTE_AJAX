@@ -1,4 +1,4 @@
-> jQuery工具、属性、CSS笔记来源：[【尚硅谷】3小时Ajax入门到精通_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1WC4y1b78y)
+> 笔记来源：[【尚硅谷】3小时Ajax入门到精通_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1WC4y1b78y)
 
 [TOC]
 
